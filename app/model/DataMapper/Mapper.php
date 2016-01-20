@@ -26,7 +26,7 @@ class Mapper{
 		return $result;
 	}
 
-	//Извлечение товара по ID
+	//Извлечение по ID
 	public function getFromID($id){
 		$sth = $this->db->prepare("SELECT ".implode($this->fields, ', ')." FROM `".$this->table."` WHERE `id` = :id");
 		$sth->execute(array('id' => $id));

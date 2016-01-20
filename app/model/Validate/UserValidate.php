@@ -37,11 +37,9 @@ class UserValidate extends Validate{
 	public function nameValid($data){
 		$data = $this->strValid($data); //Приводим к строке
 		if(empty($data)){
-			$this->errors['name'] = 'Заполните поле';
-		}elseif(mb_strlen($data, 'utf-8') < 2){
-			$this->errors['name'] = 'Имя слишком короткое';
-		}elseif(mb_strlen($data, 'utf-8') > 25){
-			$this->errors['name'] = 'Имя слишком длинное';
+			$this->errors['name'] = 'Имя: поле пустое';
+		}elseif(mb_strlen($data, 'utf-8') < 2 | mb_strlen($data, 'utf-8') > 25){
+			$this->errors['name'] = 'Имя: от 2 до 25 символов';
 		}else{
 			$this->user->name = $data;
 		}
@@ -50,11 +48,9 @@ class UserValidate extends Validate{
 	public function surnameValid($data){
 		$data = $this->strValid($data); //Приводим к строке
 		if(empty($data)){
-			$this->errors['surname'] = 'Заполните поле';
-		}elseif(mb_strlen($data, 'utf-8') > 25){
-			$this->errors['surname'] = 'Фамилия слишком длинная';
-		}elseif(mb_strlen($data, 'utf-8') < 2){
-			$this->errors['surname'] = 'Фамилия слишком короткая';
+			$this->errors['surname'] = 'Фамилия: поле пустое';
+		}elseif(mb_strlen($data, 'utf-8') > 25 | mb_strlen($data, 'utf-8') < 2){
+			$this->errors['surname'] = 'Фамилия: от 2 до 25 символов';
 		}else{
 			$this->user->surname = $data;
 		}
@@ -63,11 +59,11 @@ class UserValidate extends Validate{
 	public function emailValid($data){
 		$data = $this->strValid($data); //Приводим к строке
 		if(empty($data)){
-			$this->errors['email'] = 'Поле пустое';
+			$this->errors['email'] = 'Email: поле пустое';
 		}elseif(!filter_var($data, FILTER_VALIDATE_EMAIL)){
-			$this->errors['email'] = 'Вы ввели некорректный email';
+			$this->errors['email'] = 'Email: некорректное значение';
 		}elseif($this->user_mapper->exist('email', $data)){
-			$this->errors['email'] = 'Такой email уже существует';
+			$this->errors['email'] = 'Email: такой email уже существует';
 		}else{
 			$this->user->email = $data;
 		}
@@ -76,11 +72,11 @@ class UserValidate extends Validate{
 	public function phoneValid($data){
 		$data = $this->strValid($data);
 		if(empty($data)){
-			$this->errors['phone'] = 'Поле пустое';
-		}elseif(mb_strlen($data, 'utf-8') !== 10){
-			$this->errors['phone'] = 'Номер телефона должен состоять из 10 цифр';
+			$this->errors['phone'] = 'Телефон: поле пустое';
+		}elseif(preg_match('/^[0-9]{10}$/', $data) !== 1){
+			$this->errors['phone'] = 'Телефон: должен состоять из 10 цифр';
 		}elseif($this->user_mapper->exist('phone', $data)){
-			$this->errors['phone'] = 'Пользователь с таким телефоном уже зарегистрирован';
+			$this->errors['phone'] = 'Телефон: телефоном уже зарегистрирован в системе';
 		}else{
 			$this->user->phone = $data;
 		}
@@ -89,11 +85,9 @@ class UserValidate extends Validate{
 	public function cityValid($data){
 		$data = $this->strValid($data);
 		if(empty($data)){
-			$this->errors['city'] = 'Поле пустое';
-		}elseif(mb_strlen($data, 'utf-8') > 15){
-			$this->errors['city'] = 'Название города слишком длинное';
-		}elseif(mb_strlen($data, 'utf-8') < 2){
-			$this->errors['city'] = 'Название города слишком короткое';
+			$this->errors['city'] = 'Город: поле пустое';
+		}elseif(mb_strlen($data, 'utf-8') > 15 | mb_strlen($data, 'utf-8') < 2){
+			$this->errors['city'] = 'Город: от 2 до 15 символов';
 		}else{
 			$this->user->city = $data;
 		}
@@ -102,11 +96,9 @@ class UserValidate extends Validate{
 	public function adressValid($data){
 		$data = $this->strValid($data);
 		if(empty($data)){
-			$this->errors['adress'] = 'Поле пустое';
-		}elseif(mb_strlen($data, 'utf-8') > 70){
-			$this->errors['adress'] =  'Адрес слишком длинный';
-		}elseif(mb_strlen($data, 'utf-8') < 2){
-			$this->errors['adress'] =  'Адрес слишком короткий';
+			$this->errors['adress'] = 'Адрес: поле пустое';
+		}elseif(mb_strlen($data, 'utf-8') > 70 | mb_strlen($data, 'utf-8') < 2){
+			$this->errors['adress'] =  'Адрес: от 2 до 70 символов';
 		}else{
 			$this->user->adress = $data;
 		}
@@ -116,13 +108,11 @@ class UserValidate extends Validate{
 		$data1 = $this->strValid($data1);
 		$data2 = $this->strValid($data2);
 		if(empty($data1) or empty($data2)){
-			$this->errors['password'] = 'Введите оба пароля';
-		}elseif(mb_strlen($data1, 'utf-8') < 5){
-			$this->errors['password'] = 'Пароль слишком короткий';
-		}elseif(mb_strlen($data1, 'utf-8') > 25){
-			$this->errors['password'] = 'Пароль слишком длинный';
+			$this->errors['password'] = 'Пароль: ведите оба пароля';
+		}elseif(mb_strlen($data1, 'utf-8') < 5 | mb_strlen($data1, 'utf-8') > 25){
+			$this->errors['password'] = 'Пароль: от 2 до 25 символов';
 		}elseif($data1 !== $data2){
-			$this->errors['password'] = 'Пароли не совпадают';
+			$this->errors['password'] = 'Пароль: пароли не совпадают';
 		}else{
 			$this->user->password = $this->preparePass($data1);
 		}
