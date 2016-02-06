@@ -9,8 +9,4 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 //Автозагрузка классов
 include 'autoloader.php';
-spl_autoload_register('loadController');
-spl_autoload_register('loadMapper');
-spl_autoload_register('loadDomainObjects');
-spl_autoload_register('loadServiceObjects');
-spl_autoload_register('loadValidate');
+spl_autoload_register('loadClass');
