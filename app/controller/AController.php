@@ -26,9 +26,4 @@ abstract class AController{
 		$this->product_mapper = new ProductMapper($this->db);
 		$this->order_mapper = new OrderMapper($this->db);		
 	}
-	
-	//Перебрасываем на 404 если в контроллерах нет нужного экшена
-	public function __call($name, $arg){
-		FrontController::page404();
-	}
 }

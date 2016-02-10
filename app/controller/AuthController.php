@@ -19,7 +19,7 @@ class AuthController extends AController{
 
 		//Контроллер только для обработки POST запроса на авторизацию и GET на выход, при другом GET запросе - 404 страница
 		if($_SERVER['REQUEST_METHOD'] == 'GET'){
-			FrontController::page404();
+			FrontController::get404();
 		}
 	}
 }

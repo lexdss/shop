@@ -4,20 +4,12 @@ class CatController extends AController{
 	private $category_code;
 	
 	public function indexAction(){
-		FrontController::page404();
+		FrontController::get404();
 	}
 
-
-	//Для каждой категории выполняются одинаковые действия, чтобы не создавать одинаковые методы для каждой категории можно использовать магический метод
-	public function __call($name, $args){
-
-		//Вместо categoryAction делаем category
-		$this->category_code = str_replace('Action', '', $name);
-
-		//Получаем объект запрошенной категории или редиректим на 404 если категории нет
-		if(!$category = $this->category_mapper->getCategoryFromCode($this->category_code)){
-			FrontController::page404();
-		}
+	//Загрузка страницы категории
+	public function categoryAction($name){
+		$this->category_name = $name;
 
 		//При добавлении товара в корзину
 		if($_GET['add']){
@@ -28,8 +20,8 @@ class CatController extends AController{
 		if(!empty($_GET['item_id'])){
 			$this->detailProduct();
 		}else{
-			//Массив объектов товаров выбранной категории
-			$this->view->item = $this->product_mapper->getProductFromCategory($category->code);
+			
+			$this->view->item = $this->product_mapper->getProductFromCategory($this->category_name);
 			$this->view->title = $category->title;
 			$this->view->render('cat.tpl.php');
 		}
@@ -42,7 +34,7 @@ class CatController extends AController{
 			$this->view->title = $item->title;
 			$this->view->render('product_page.tpl.php');
 		}else{
-			FrontController::page404();
+			FrontController::get404();
 		}
 	}
 
@@ -55,7 +47,7 @@ class CatController extends AController{
 			header('Location: '.$_SERVER['HTTP_REFERER']);
 			exit;
 		}else{
-			header('Location: /cat/'.$this->category_code);
+			header('Location: /cat/'.$this->category_name);
 			exit;
 		}
 	}
