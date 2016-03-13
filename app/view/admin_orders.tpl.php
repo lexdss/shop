@@ -1,7 +1,7 @@
 <?php if(isset($_SESSION['message'])):?>
 	<div class="error"><?=$_SESSION['message'];?></div>
 <?php endif;?>
-<?php if(!empty($this->orders)):?>
+<?php if(!empty($orders)):?>
 	<table border=1>
 		<tr>
 			<th>Номер заказа</th>
@@ -9,7 +9,7 @@
 			<th>Статус</th>
 			<th>Дата</th>
 		</tr>
-			<?php foreach($this->orders as $order):?>
+			<?php foreach($orders as $order):?>
 				<tr>
 					<td><a href="/admin/orders?order=<?=$order->id;?>"><?=$order->id;?></a></td>
 					<td><?=$order->total_sum;?> руб</td>

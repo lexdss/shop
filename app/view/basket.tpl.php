@@ -1,5 +1,5 @@
 <div class="content">
-	<?php if(!empty($this->basket)):?>
+	<?php if(!empty($basket)):?>
 		<div class="table">
 			<div class="row">
 				<div class="cell"><b>Наименование</b></div>
@@ -7,7 +7,7 @@
 				<div class="cell"><b>Цена</b></div>
 				<div class="cell"><b>Убрать товар</b></div>
 			</div>
-				<?php foreach($this->basket as $id => $item):?>
+				<?php foreach($basket as $id => $item):?>
 					<div class="row">
 						<div class="cell"><?=$item['name'];?></div>
 						<div class="cell"><?=$item['count'];?> шт.</div>

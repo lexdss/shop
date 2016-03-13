@@ -26,11 +26,11 @@ class CategoryValidate extends Validate{
 	private function nameValid($data){
 		$data = $this->strValid($data);
 		if(empty($data)){
-			$this->errors['name'] = 'Поле пустое';
+			$this->errors['name'] = 'Название категории: Поле пустое';
 		}elseif(mb_strlen($data, 'utf-8') > 20){
-			$this->errors['name'] = 'Имя категории слишком длинное';
+			$this->errors['name'] = 'Название категории: Слишком длинное';
 		}elseif(mb_strlen($data, 'utf-8') < 2){
-			$this->errors['name'] = 'Имя категории слишком короткое';
+			$this->errors['name'] = 'Название категории: Слишком короткое';
 		}else{
 			$this->category->name = $data;
 		}
@@ -39,13 +39,13 @@ class CategoryValidate extends Validate{
 	private function codeValid($data){
 		$data = $this->strValid($data);
 		if(empty($data)){
-			$this->errors['code'] = 'Поле пустое';
+			$this->errors['code'] = 'Символьный код: Поле пустое';
 		}elseif($this->category_mapper->exist('code', $data)){
-			$this->errors['code'] = 'Такая категория уже существует';
+			$this->errors['code'] = 'Символьный код:  Уже существует';
 		}elseif(mb_strlen($data, 'utf-8') > 20){
-			$this->errors['code'] = 'Символьный код слишком длинный';
+			$this->errors['code'] = 'Символьный код: Слишком длинный';
 		}elseif(mb_strlen($data, 'utf-8') < 2){
-			$this->errors['code'] = 'Символьный код слишком короткий';
+			$this->errors['code'] = 'Символьный код: Слишком короткий';
 		}else{
 			$this->category->code = $data;
 		}
@@ -54,11 +54,11 @@ class CategoryValidate extends Validate{
 	private function titleValid($data){
 		$data = $this->strValid($data);
 		if(empty($data)){
-			$this->errors['title'] = 'Поле пустое';
+			$this->errors['title'] = 'Заоловок страницы (title): Поле пустое';
 		}elseif(mb_strlen($data, 'utf-8') > 150){
-			$this->errors['title'] = 'Тайтл слишком длинный';
+			$this->errors['title'] = 'Заоловок страницы (title): Слишком длинный';
 		}elseif(mb_strlen($data, 'utf-8') < 2){
-			$this->errors['title'] = 'Тайтл слишком короткий';
+			$this->errors['title'] = 'Заоловок страницы (title): Слишком короткий';
 		}else{
 			$this->category->title = $data;
 		}

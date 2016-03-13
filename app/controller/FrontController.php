@@ -2,12 +2,12 @@
 
 class FrontController{
 
-	private $db;
+	private $service;
 
 	//Определение контроллера и экшена
-	function __construct(PDO $db){
+	function __construct(Service $service){
 
-		$this->db = $db;
+		$this->service = $service;
 
 	}
 	
@@ -17,38 +17,38 @@ class FrontController{
 		$request_arr = explode('/', $request);
 		
 		if($request == ''){
-			$controller = new IndexController($this->db);
+			$controller = new IndexController($this->service);
 			$controller->indexAction();
 		}elseif($request == 'basket'){
-			$controller = new BasketController($this->db);
+			$controller = new BasketController($this->service);
 			$controller->indexAction();
 		}elseif($request == 'auth'){
-			$controller = new AuthController($this->db);
+			$controller = new AuthController($this->service);
 			$controller->indexAction();
 		}elseif($request == 'reg'){
-			$controller = new RegController($this->db);
+			$controller = new RegController($this->service);
 			$controller->indexAction();
 		}elseif($request == 'admin'){
-			$controller = new AdminController($this->db);
+			$controller = new AdminController($this->service);
 			$controller->indexAction();
 		}elseif($request == 'admin/additem'){
-			$controller = new AdminController($this->db);
+			$controller = new AdminController($this->service);
 			$controller->additemAction();
 		}elseif($request == 'admin/category'){
-			$controller = new AdminController($this->db);
+			$controller = new AdminController($this->service);
 			$controller->categoryAction();
 		}elseif($request == 'admin/catalog'){
-			$controller = new AdminController($this->db);
+			$controller = new AdminController($this->service);
 			$controller->catalogAction();
 		}elseif($request == 'admin/orders'){
-			$controller = new AdminController($this->db);
+			$controller = new AdminController($this->service);
 			$controller->ordersAction();
 		}elseif($request = 'cat/' . $request_arr[1]){
-			$category_mapper = new CategoryMapper($this->db);
+			$category_mapper = new CategoryMapper($this->service->get('db'));
 			if(!$category_mapper->getCategoryFromCode($request_arr[1])){
 				$this->get404();
 			}else{
-				$controller = new CatController($this->db);
+				$controller = new CatController($this->service);
 				$controller->categoryAction($request_arr[1]);
 			}
 		}else{

@@ -1,13 +1,14 @@
 <?php
 class Mapper{
+	
 	public $table; //@string Имя таблицы
 	public $fields; //@array Поля таблицы
 	public $db; //Объект PDO
 	public $obj_name; //@string Имя доменного объекта для динамического создания
 	public $order_by = 'ORDER BY id DESC'; //Сортировка по-умолчанию
 
-	public function __construct(PDO $pdo){
-		$this->db = $pdo;
+	public function __construct(PDO $db){
+		$this->db = $db;
 	}
 
 	//Выборка из БД

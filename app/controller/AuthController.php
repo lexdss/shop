@@ -1,11 +1,14 @@
 <?php
 
-class AuthController extends AController{
+class AuthController extends Controller{
 
 	public function indexAction(){
 		if(isset($_POST['login'])){
-			$auth = new Auth($this->user_mapper);
-			$auth->login($_POST);
+			if(empty($_POST['email']) || empty($_POST['password'])){
+				$_SESSION['message'] = 'Введите логин и пароль';
+			}else{
+				$this->service->get('auth')->login($_POST);
+			}
 			header('Location: '.$_SERVER['HTTP_REFERER']);
 			exit;
 		}

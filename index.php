@@ -3,7 +3,8 @@
 try{
 
 	include 'app/bootstrap.php';
-	$app = new FrontController($db);
+
+	$app = new FrontController($service);
 	$app->route();
 
 }catch(Exception $e){

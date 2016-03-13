@@ -4,8 +4,8 @@
 class OrderMapper extends Mapper{
 
 	public $table = 'order';
-	public $fields = array('id', 'user_id', 'delivery', 'pay', 'total_sum', 'status', 'date');
 	public $db;
+	public $fields = array('id', 'user_id', 'delivery', 'pay', 'total_sum', 'status', 'date');
 	public $obj_name = 'Order';
 
 

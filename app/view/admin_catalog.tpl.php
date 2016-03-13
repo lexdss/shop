@@ -20,8 +20,8 @@
 				<div class="cell"><b>Категория</b></div>
 				<div class="cell"><b>Цена</b></div>
 			</div>
-			<?php if(!empty($this->items)):?>
-				<?php foreach($this->items as $item):?>
+			<?php if(!empty($items)):?>
+				<?php foreach($items as $item):?>
 					<div class="row">
 						<div class="cell">
 							<input type='checkbox' name='<?=$item->id;?>' value='<?=$item->id;?>'>

@@ -1,5 +1,5 @@
 <?php
-class BasketController extends AController{
+class BasketController extends Controller{
 
 	public function indexAction(){
 
@@ -28,7 +28,7 @@ class BasketController extends AController{
 			$order->products = $basket;
 
 			//Сохраняем заказ
-			$this->order_mapper->save($order);
+			$this->service->get('order_mapper')->save($order);
 
 			//Очищаем корзину и редиректим
 			Basket::cleanBasket();
@@ -37,8 +37,8 @@ class BasketController extends AController{
 			exit;
 		}
 
-		$this->view->basket = $basket;
-		$this->view->title = 'Корзина покупателя';
-		$this->view->render('basket.tpl.php');
+		$view_data['basket'] = $basket;
+		$view_data['title'] = 'Корзина покупателя';
+		$this->service->get('view')->render('basket.tpl.php', $view_data);
 	}
 }

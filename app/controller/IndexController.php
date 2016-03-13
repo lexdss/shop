@@ -1,9 +1,9 @@
 <?php
-class IndexController extends AController{
+class IndexController extends Controller{
 
 	public function indexAction(){
-		$this->view->item = $this->product_mapper->getAll(); //Выборка всех товаров
-		$this->view->title = 'Главная страница'; //Title страницы
-		$this->view->render('index.tpl.php');
+		$view_data['item'] = $this->service->get('product_mapper')->getAll(); //Выборка всех товаров
+		$view_data['title'] = 'Главная страница';
+		$this->service->get('view')->render('index.tpl.php', $view_data);
 	}
 }

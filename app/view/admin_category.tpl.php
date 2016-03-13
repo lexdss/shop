@@ -21,9 +21,18 @@
 <input type='submit' value='Удалить' name='delete_category'>
 </form>
 
+<?php if(!empty($error)):?>
+	<p>Проверьте правильность заполнения формы:</p>
+	<div class="error">
+		<?php foreach($error as $error):?>
+			<?=$error;?><br>
+		<?php endforeach;?>
+	</div>
+<?php endif;?>
+
 <form action='' method='POST'>
-	<div class="form-input"><label>Название категории: <input type='text' name='name' value="<?=$this->value['name'];?>"></label><span class="error"><?=$this->error['name'];?></span></div>
-	<div class="form-input"><label>Символьный код: <input type='text' name='code' value="<?=$this->value['code'];?>"></label><span class="error"><?=$this->error['code'];?></span></div>
-	<div class="form-input"><label>Заоловок страницы (title): <input type='text' name='title' value="<?=$this->value['title'];?>"></label><span class="error"><?=$this->error['title'];?></span></div>
+	<div class="form-input"><label>Название категории: <input type='text' name='name' value="<?=$value['name'];?>"></label></div>
+	<div class="form-input"><label>Символьный код: <input type='text' name='code' value="<?=$value['code'];?>"></label></div>
+	<div class="form-input"><label>Заоловок страницы (title): <input type='text' name='title' value="<?=$this->value['title'];?>"></label></div>
 	<div class="form-input"><input type='submit' value='Добавить' name='add_category'></div>
 </form>

@@ -1,6 +1,6 @@
 	<div class="content">
-		<?php if(!empty($this->item)):?>
-			<?php foreach($this->item as $item):?>
+		<?php if(!empty($item)):?>
+			<?php foreach($item as $item):?>
 				<div class="item">
 					<p class="item-name"><a href="/cat/<?=$item->category;?>?item_id=<?=$item->id;?>"><?=$item->name;?></a></p>
 					<img class="prew-img" src="/<?=$item->image;?>">
